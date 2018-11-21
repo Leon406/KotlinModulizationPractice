@@ -1,8 +1,17 @@
-apply plugin: 'com.android.library'
+if (isModuleLib.toBoolean()) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
 
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion targetVer
     defaultConfig {
+        if (!isModuleLib.toBoolean()) {
+            applicationId "me.leon.usercenter"
+        }
         minSdkVersion minVer
         targetSdkVersion targetVer
         versionCode 1
@@ -18,12 +27,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            if (isModuleLib.toBoolean()) {
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            }
+        }
+    }
 
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
-    api project(':baselib')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':provider')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

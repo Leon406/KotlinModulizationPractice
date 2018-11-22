@@ -3,5 +3,5 @@ package me.leon.base.presenter
 interface IView {
     fun showLoading()
     fun hideLoading()
-    fun onErroe(err: Throwable)
+    fun onError(err: Throwable)
 }

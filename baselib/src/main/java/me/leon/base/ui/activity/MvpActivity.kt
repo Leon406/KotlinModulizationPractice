@@ -11,7 +11,7 @@ open class MvpActivity<P : BasePresenter<*>> : BaseActivity(), IView {
     override fun hideLoading() {
     }
 
-    override fun onErroe(err: Throwable) {
+    override fun onError(err: Throwable) {
     }
 
 }

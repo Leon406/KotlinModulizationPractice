@@ -16,7 +16,7 @@ class RegisterActivity : MvpActivity<RegisterPresenter>(), RegisterView {
         presenter.mView = this
 
         btnVerify.setOnClickListener {
-            presenter.doRegister("11111","5555")
+            presenter.doRegister("11111","5555","1111111")
 
         }
     }
